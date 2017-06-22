@@ -2,6 +2,7 @@ package raftbadger
 
 import (
 	"errors"
+	"io"
 	"os"
 
 	"github.com/dgraph-io/badger/badger"
@@ -10,13 +11,25 @@ import (
 
 var ErrKeyNotFound = errors.New("not found")
 
+// LogStore combines raft.LogStore and io.Closer
+type LogStore interface {
+	raft.LogStore
+	io.Closer
+}
+
 // NewLogStore uses the supplied options to open a log store. badger.DefaultOptions
 // will be used, if nil is passed for opt.
-func NewLogStore(dir string, opt *badger.Options) (raft.LogStore, error) { return newStore(dir, opt) }
+func NewLogStore(dir string, opt *badger.Options) (LogStore, error) { return newStore(dir, opt) }
+
+// StableStore combines raft.StableStore and io.Closer
+type StableStore interface {
+	raft.StableStore
+	io.Closer
+}
 
 // NewStableStore uses the supplied options to open a stable store. badger.DefaultOptions
 // will be used, if nil is passed for opt.
-func NewStableStore(dir string, opt *badger.Options) (raft.StableStore, error) {
+func NewStableStore(dir string, opt *badger.Options) (StableStore, error) {
 	return newStore(dir, opt)
 }
 
