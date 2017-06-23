@@ -27,15 +27,15 @@ func uint64ToBytes(u uint64) []byte {
 	return buf
 }
 
-func gobEncode(v interface{}) ([]byte, error) {
+func gobEncode(v interface{}) (*bytes.Buffer, error) {
 	buf := bufPool.Get().(*bytes.Buffer)
 	buf.Reset()
-	defer bufPool.Put(buf)
 
 	if err := gob.NewEncoder(buf).Encode(v); err != nil {
+		bufPool.Put(buf)
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	return buf, nil
 }
 
 func gobDecode(p []byte, v interface{}) error {

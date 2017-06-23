@@ -89,21 +89,29 @@ func (s *store) GetLog(idx uint64, log *raft.Log) error {
 
 // StoreLog is used to store a single raft log
 func (s *store) StoreLog(log *raft.Log) error {
-	val, err := gobEncode(log)
+	buf, err := gobEncode(log)
 	if err != nil {
 		return err
 	}
-	return s.kv.Set(uint64ToBytes(log.Index), val)
+	defer bufPool.Put(buf)
+
+	return s.kv.Set(uint64ToBytes(log.Index), buf.Bytes())
 }
 
 // StoreLogs is used to store a set of raft logs
 func (s *store) StoreLogs(logs []*raft.Log) error {
-	for _, l := range logs {
-		if err := s.StoreLog(l); err != nil {
+	entries := make([]*badger.Entry, 0, len(logs))
+	for _, log := range logs {
+		buf, err := gobEncode(log)
+		if err != nil {
 			return err
 		}
+		defer bufPool.Put(buf)
+
+		key := uint64ToBytes(log.Index)
+		entries = badger.EntriesSet(entries, key, buf.Bytes())
 	}
-	return nil
+	return s.kv.BatchSet(entries)
 }
 
 // DeleteRange is used to delete logs within a given range inclusively.
