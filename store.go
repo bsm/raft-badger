@@ -119,17 +119,15 @@ func (s *store) DeleteRange(min, max uint64) error {
 	it := s.kv.NewIterator(badger.IteratorOptions{PrefetchSize: 100})
 	defer it.Close()
 
+	var entries []*badger.Entry
 	for it.Seek(uint64ToBytes(min)); it.Valid(); it.Next() {
 		key := it.Item().Key()
 		if bytesToUint64(key) > max {
 			break
 		}
-
-		if err := s.kv.Delete(key); err != nil {
-			return err
-		}
+		entries = badger.EntriesDelete(entries, key)
 	}
-	return nil
+	return s.kv.BatchSet(entries)
 }
 
 // Set is used to set a key/value set outside of the raft log
