@@ -44,17 +44,9 @@ func newStore(dir string, opt *badger.Options) (*store, error) {
 		opt = new(badger.Options)
 		*opt = badger.DefaultOptions
 	}
-	if opt.Dir == "" {
-		opt.Dir = dir
-	}
-	if opt.ValueDir == "" {
-		opt.ValueDir = dir
-	}
+	opt.Dir = dir
 
 	if err := os.MkdirAll(opt.Dir, 0777); err != nil {
-		return nil, err
-	}
-	if err := os.MkdirAll(opt.ValueDir, 0777); err != nil {
 		return nil, err
 	}
 
