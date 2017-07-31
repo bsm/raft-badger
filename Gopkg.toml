@@ -22,7 +22,6 @@
 
 
 [[constraint]]
-  branch = "master"
   name = "github.com/hashicorp/raft"
 
 [[constraint]]
