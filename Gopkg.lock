@@ -11,7 +11,7 @@
   branch = "master"
   name = "github.com/armon/go-metrics"
   packages = ["."]
-  revision = "f036747b9d0e8590f175a5d654a2194a7d9df4b5"
+  revision = "023a4bbe4bb9bfb23ee7e1afc8d0abad217641f3"
 
 [[projects]]
   name = "github.com/bkaradzic/go-lz4"
@@ -27,15 +27,27 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/hashicorp/go-immutable-radix"
+  packages = ["."]
+  revision = "8aac2701530899b64bdea735a1de8da899815220"
+
+[[projects]]
+  branch = "master"
   name = "github.com/hashicorp/go-msgpack"
   packages = ["codec"]
   revision = "fa3f63826f7c23912c15263591e65d54d080b458"
 
 [[projects]]
   branch = "master"
+  name = "github.com/hashicorp/golang-lru"
+  packages = ["simplelru"]
+  revision = "0a025b7e63adc15a622f29b0b2c4c3848243bbf6"
+
+[[projects]]
+  branch = "master"
   name = "github.com/hashicorp/raft"
   packages = ["."]
-  revision = "b3d48f1a4e569bc4d4e456e8930e35b1aa996ea7"
+  revision = "ac704075e75b8626023224c76c56be4d6958a5dc"
 
 [[projects]]
   name = "github.com/onsi/ginkgo"
@@ -59,25 +71,25 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","html","html/atom","html/charset","internal/timeseries","trace"]
-  revision = "f5079bd7f6f74e23c4d65efa0f4ce14cbd6a3c0f"
+  revision = "1c05540f6879653db88113bc4a2b70aec4bd491f"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "0f826bdd13b500be0f1d4004938ad978fcc6031e"
+  revision = "07c182904dbd53199946ba614a412c61d3c548f5"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
   packages = ["encoding","encoding/charmap","encoding/htmlindex","encoding/internal","encoding/internal/identifier","encoding/japanese","encoding/korean","encoding/simplifiedchinese","encoding/traditionalchinese","encoding/unicode","internal/gen","internal/tag","internal/utf8internal","language","runes","transform","unicode/cldr"]
-  revision = "3bd178b88a8180be2df394a1fbb81313916f0e7b"
+  revision = "e56139fd9c5bc7244c76116c68e500765bb6db6b"
 
 [[projects]]
   branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "25c4ec802a7d637f88d584ab26798e94ad14c13b"
+  revision = "eb3733d160e74a9c7e442f435eb3bea458e1d19f"
 
 [solve-meta]
   analyzer-name = "dep"
